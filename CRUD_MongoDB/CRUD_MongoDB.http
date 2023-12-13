@@ -1,0 +1,6 @@
+@CRUD_MongoDB_HostAddress = http://localhost:5061
+
+GET {{CRUD_MongoDB_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
