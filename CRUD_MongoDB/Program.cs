@@ -1,14 +1,13 @@
 using CRUD_MongoDB;
-using CRUD_MongoDB.Models;
 using CRUD_MongoDB.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<MetroStoreDatabaseSettings>(
     builder.Configuration.GetSection("MetroStoreDatabase"));
-builder.Services.AddSingleton<LineService>();
-builder.Services.AddSingleton<StationService>();
-builder.Services.AddSingleton<DeviceService>();
+builder.Services.AddSingleton<LinesService>();
+builder.Services.AddSingleton<StationsService>();
+builder.Services.AddSingleton<DevicesService>();
 
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);

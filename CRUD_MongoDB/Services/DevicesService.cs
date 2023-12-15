@@ -4,11 +4,11 @@ using MongoDB.Driver;
 
 namespace CRUD_MongoDB.Services;
 
-public class DeviceService
+public class DevicesService
 {
     private readonly IMongoCollection<Device> _devicessCollection;
 
-    public DeviceService(IOptions<MetroStoreDatabaseSettings> metroStoreDatabaseSettings)
+    public DevicesService(IOptions<MetroStoreDatabaseSettings> metroStoreDatabaseSettings)
     {
         var mongoClient = new MongoClient(
             metroStoreDatabaseSettings.Value.ConnectionString);
@@ -23,15 +23,15 @@ public class DeviceService
     public async Task<List<Device>> GetAsync() =>
         await _devicessCollection.Find(_ => true).ToListAsync();
 
-    public async Task<Device?> GetAsync(int id) =>
+    public async Task<Device?> GetAsync(string id) =>
         await _devicessCollection.Find(l => l.Id == id).FirstOrDefaultAsync();
     
     public async Task CreateAsync(Device newDevice) =>
         await _devicessCollection.InsertOneAsync(newDevice);
     
-    public async Task UpdateAsync(int id, Device updatedDevice) =>
+    public async Task UpdateAsync(string id, Device updatedDevice) =>
         await _devicessCollection.ReplaceOneAsync(x => x.Id == id, updatedDevice);
     
-    public async Task RemoveAsync(int id) =>
+    public async Task RemoveAsync(string id) =>
         await _devicessCollection.DeleteOneAsync(x => x.Id == id);
 }

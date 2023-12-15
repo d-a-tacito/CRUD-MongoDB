@@ -6,8 +6,9 @@ namespace CRUD_MongoDB.Models;
 public class Device
 {
     [BsonId]
-    [BsonRepresentation(BsonType.Int32)]
-    public int Id { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    [BsonIgnoreIfDefault]
+    public string? Id { get; set; }
 
     [BsonElement("type")]
     public string Type { get; set; }
@@ -15,6 +16,7 @@ public class Device
     [BsonElement("isWorking")]
     public bool IsWorking { get; set; }
     
-    [BsonElement("station_id")]
-    public int StationId { get; set; }
+    [BsonElement("stationId")]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string StationId { get; set; }
 }
