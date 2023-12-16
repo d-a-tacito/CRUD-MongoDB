@@ -38,7 +38,7 @@ public class DeviceController : ControllerBase
             IsWorking = newDeviceDto.IsWorking,
             StationId = newDeviceDto.StationId
         };
-        
+
         await _devicesService.CreateAsync(newStation);
         return CreatedAtAction(nameof(Get), new { id = newStation.Id }, newStation);
     }
@@ -68,5 +68,11 @@ public class DeviceController : ControllerBase
         await _devicesService.RemoveAsync(id);
         return NoContent();
     }
-    
+
+    [HttpGet("count")]
+    public async Task<IActionResult> GetCountByType()
+    {
+            var countsByType = await _devicesService.CountDevicesByTypeAsync();
+            return Ok(countsByType);
+    }
 }

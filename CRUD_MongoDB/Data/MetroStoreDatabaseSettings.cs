@@ -7,4 +7,5 @@ public class MetroStoreDatabaseSettings
     public string LinesCollectionName { get; set; } = "lines";
     public string StationsCollectionName { get; set; } = "stations";
     public string DevicesCollectionName { get; set; } = "devices";
+    
 }
