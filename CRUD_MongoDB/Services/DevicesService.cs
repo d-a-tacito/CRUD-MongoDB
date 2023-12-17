@@ -20,7 +20,17 @@ public class DevicesService
 
         _devicesCollection = mongoDatabase.GetCollection<Device>(
             metroStoreDatabaseSettings.Value.DevicesCollectionName);
+        
+        CreateTypeIndex();
     }
+    
+    private void CreateTypeIndex()
+    {
+        var key = Builders<Device>.IndexKeys.Ascending(device => device.Type);
+        var indexModel = new CreateIndexModel<Device>(key);
+        _devicesCollection.Indexes.CreateOne(indexModel);
+    }
+
 
     public async Task<List<Device>> GetAsync() =>
         await _devicesCollection.Find(_ => true).ToListAsync();
